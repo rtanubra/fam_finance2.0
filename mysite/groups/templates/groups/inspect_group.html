@@ -1,0 +1,17 @@
+<h1>Groups</h1>
+<h3>Edit {{group.group_name}}!</h3>
+<form method=POST action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = "Save Edits!" >
+</form>
+<h3>Satisfied with {{group.group_name}}</h3>
+<button> <a href="{% url 'groups:groups_index' %}" >Go Back to Summary</a> </button>
+{% if products|length > 1 %}
+<h3>Meet The team at {{group.group_name}}</h3>
+<ul>
+    {% for person in people %}
+    <li>{{person.person_name}}</li>
+    {% endfor %}
+</ul>
+{% endif %}

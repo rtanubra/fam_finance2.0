@@ -1,0 +1,10 @@
+<h1>Groups</h1>
+<h3>List View</h3>
+<ul>
+    {% for group in current_groups %}
+        <a href = '{{group.id}}/'><li>{{group.group_name}} from {{group.group_location}}</li></a>
+    {% endfor %}
+</ul>
+<h3>Take Action!</h3>
+<button><a href= "{% url 'groups:create_group' %}">Add a group</a></button>
+

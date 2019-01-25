@@ -1,0 +1,2 @@
+This is a 2.0 version of my first attempt at creating this web application. In my first forray into django i did not keep it clean.
+The biggest lesson learn is a django app should be modular. Each application should be simple and do something specific.
