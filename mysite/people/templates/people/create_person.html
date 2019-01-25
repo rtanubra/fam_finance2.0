@@ -1,0 +1,9 @@
+<h1>People</h1>
+<form method=POST action="" >
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = "Add Person!" >
+</form>
+
+<h3>All set with adding?</h3>
+<button><a href="{% url 'people:people_index' %}" >Back to summary</a></button>

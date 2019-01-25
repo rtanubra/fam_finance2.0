@@ -1,6 +1,9 @@
 <h1>People</h1>
+<h3>People list</h3>
 <ul>
     {% for person in people %}
     <li>{{person.person_name}} FROM TEAM {{person.group_couple}}</li>
     {% endfor %}
 </ul>
+
+<button> <a href= "{% url 'people:create_person' %}">Add a new Person</a> </button>
