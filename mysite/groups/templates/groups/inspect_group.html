@@ -7,11 +7,11 @@
 </form>
 <h3>Satisfied with {{group.group_name}}</h3>
 <button> <a href="{% url 'groups:groups_index' %}" >Go Back to Summary</a> </button>
-{% if products|length > 1 %}
+{% if people|length > 0 %}
 <h3>Meet The team at {{group.group_name}}</h3>
 <ul>
     {% for person in people %}
-    <li>{{person.person_name}}</li>
+    <li><button><a href="{% url 'people:edit_person' my_id=person.id %}" >{{person.person_name}}</a></button></li>
     {% endfor %}
 </ul>
 {% endif %}
