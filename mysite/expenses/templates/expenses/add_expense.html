@@ -1,0 +1,9 @@
+<h1>Expenses</h1>
+<h3>Adding an expense in {{category.category_name}}</h3>
+<h4>Expected {{category.category_expected}}</h4>
+<h4>Spent {{category.category_spent}}</h4> 
+<form method=POST action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = "Save This Entry!" >
+</form>

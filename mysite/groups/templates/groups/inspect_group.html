@@ -11,7 +11,8 @@
 <h3>Meet The team at {{group.group_name}}</h3>
 <ul>
     {% for person in people %}
-    <li><button><a href="{% url 'people:edit_person' my_id=person.id %}" >{{person.person_name}}</a></button></li>
+    <li>{{person.person_name}}<button><a href = "{% url 'people:edit_person' person.id  %}" >Edit</a></button> or <button><a href= "{% url 'categories:person_category_index' person.id  %}" >View Expenses</a></button>
+    </li>
     {% endfor %}
 </ul>
 {% endif %}

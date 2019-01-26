@@ -2,6 +2,7 @@ from django import forms
 from people.models import People
 from .models import Category
 from django.forms.widgets import HiddenInput
+
 class CategoryAddForm(forms.ModelForm):
 
     class Meta:
