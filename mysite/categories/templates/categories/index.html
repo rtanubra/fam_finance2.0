@@ -10,4 +10,7 @@
     <p>{{person.person_name}} has no expenses setup at this moment</p>
 {% endif %}
 <h3>Add Expense</h3>
-<button href = "">Add an Expense</button>
+<button><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense</a></button>
+
+<h3>Let's Go Back to Groups</h3>
+<button><a href="{% url 'groups:groups_index' %}">back to groups</a></button>
