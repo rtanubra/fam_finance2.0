@@ -1,0 +1,13 @@
+<h1>Categories</h1>
+<h3>Expense Categories for {{person.person_name}}</h3>
+{% if categories|length > 0 %}
+    <ul>
+        {% for category in categories %}
+            <li>{{category.category_name}} Expected:{{category.category_expected}} Spent:{{category.category_spent}}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>{{person.person_name}} has no expenses setup at this moment</p>
+{% endif %}
+<h3>Add Expense</h3>
+<button href = "">Add an Expense</button>

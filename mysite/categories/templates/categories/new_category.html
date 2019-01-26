@@ -1,0 +1,7 @@
+<h1>Categories</h1>
+<h3>Add a new Expense Category for {{person.person_name}}</h3><br>
+<form method=POST action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = "Save This Expense!" >
+</form>

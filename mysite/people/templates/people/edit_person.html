@@ -5,5 +5,9 @@
     <input type="submit" value = "Save Edits!" >
 </form>
 
+<h3>Visit {{person.person_name}}'s Expenses?</h3>
+<button><a href="{% url 'categories:person_category_index' person_id=person.id %}" >{{person.person_name}} Expenses</a></button>
+
 <h3>All set with editing?</h3>
 <button><a href="{% url 'people:people_index' %}" >Back to summary</a></button>
+

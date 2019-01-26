@@ -42,6 +42,7 @@ def edit_person(request,my_id):
             print("Something happend!")
             form = PersonAddForm()
     context = {
-        'form':form
+        'form':form,
+        'person':person
     }
     return render(request,'people/edit_person.html',context)
