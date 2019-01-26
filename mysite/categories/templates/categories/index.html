@@ -3,7 +3,7 @@
 {% if categories|length > 0 %}
     <ul>
         {% for category in categories %}
-            <li>{{category.category_name}} Expected:{{category.category_expected}} Spent:{{category.category_spent}}</li>
+            <li><a href="{% url 'categories:edit_category' person_id=person.id category_id=category.id %}" >{{category.category_name}} Expected:{{category.category_expected}} Spent:{{category.category_spent}}</a></li>
         {% endfor %}
     </ul>
 {% else %}

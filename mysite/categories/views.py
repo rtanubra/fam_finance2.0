@@ -40,3 +40,22 @@ def addCategory(request,person_id):
         "form":form
     }
     return render(request,"categories/new_category.html",context)
+
+def editCategory(request,person_id,category_id):
+    person = get_object_or_404(People, id=person_id)
+    category = get_object_or_404(Category, id=category_id)
+    my_instance = category
+    form = CategoryAddForm(request.POST or None,instance=my_instance,hide_condition=True)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            form = CategoryAddForm(instance=my_instance,hide_condition=True)
+        else:
+            print("Failed validation")
+            form = CategoryAddForm(instance=my_instance,hide_condition=True)
+    context = {
+        'person':person,
+        'category':category,
+        'form':form
+    }
+    return render(request,"categories/edit_category.html",context)

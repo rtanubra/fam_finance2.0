@@ -1,0 +1,9 @@
+<h1>Categories</h1>
+<h3>Edit Category Expense {{person.person_name}}, Category : {{category.category_name}}</h3>
+<form method=POST action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value = "Save Edits!" >
+</form>
+<h3>Finished recording expenses?</h3>
+<button><a href="{% url 'categories:person_category_index' person_id=person.id %}" >Back to {{person.person_name}}'s Expense Categories</a></button>
