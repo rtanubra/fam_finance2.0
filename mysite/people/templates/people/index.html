@@ -2,7 +2,7 @@
 <h3>People list</h3>
 <ul>
     {% for person in people %}
-    <li>{{person.person_name}} FROM TEAM {{person.group_couple}}</li>
+    <li><a href="{{person.id}}/" >{{person.person_name}} FROM TEAM {{person.group_couple}}</a></li>
     {% endfor %}
 </ul>
 

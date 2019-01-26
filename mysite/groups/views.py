@@ -18,12 +18,13 @@ def create_group(request):
 
     }
     form = GroupAddForm(request.POST or None,initial=initial_data)
-    if form.is_valid():
-        form.save()
-        form = GroupAddForm()
-    else:
-        print("Something happend!")
-        form = GroupAddForm()
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            form = GroupAddForm()
+        else:
+            print("Something happend!")
+            form = GroupAddForm()
     context= {
         'form':form
     }
@@ -36,12 +37,13 @@ def inspect_group(request,my_id):
     else:
         people = []
     form = GroupAddForm(request.POST or None, instance = obj)
-    if form.is_valid():
-        form.save()
-        form = GroupAddForm(instance=obj)
-    else:
-        print("Something happend!")
-        form = GroupAddForm(instance=obj)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            form = GroupAddForm(instance=obj)
+        else:
+            print("Something happend!")
+            form = GroupAddForm(instance=obj)
     context = {
         'form':form,
         'group':obj,

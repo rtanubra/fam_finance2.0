@@ -31,13 +31,13 @@ def create_person(request):
     }
     return render(request,'people/create_person.html',context)
 
-def edit_person(request,person_id):
-    person = People.objects.get(id=person_id)
+def edit_person(request,my_id):
+    person = People.objects.get(id=my_id)
     form = PersonAddForm(request.POST or None,instance=person)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            form = PersonAddForm()
+            form = PersonAddForm(instance=person)
         else:
             print("Something happend!")
             form = PersonAddForm()
