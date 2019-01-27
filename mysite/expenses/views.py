@@ -14,7 +14,9 @@ from .forms import ExpenseAddForm
 def add_expense(request,person_id,category_id):
     person = get_object_or_404(People,id=person_id)
     category = get_object_or_404(Category,id=category_id)
-    cc = get_object_or_404(Category, category_person=person, category_name="credit_card")
+    month = category.category_date.month
+    year = category.category_date.year
+    cc = get_object_or_404(Category, category_person=person, category_name="credit_card",category_date__month=month,category_date__year=year)
     initial_data = {
         'expense_category':category,
     }
@@ -25,14 +27,14 @@ def add_expense(request,person_id,category_id):
             #We are paying off credit card
             if category == cc:
                 category.category_expected -= new_expense.expense_amount
-                category.category_spent -= new_expense.expense_amount
+
                 category.save()
             #Purchasing Actual Expense
             else:
 #==========================pmt type == CC#==========================
                 if new_expense.method_of_payment == "Credit":
                     cc.category_expected += new_expense.expense_amount
-                    cc.category_spent += new_expense.expense_amount
+
                     category.category_spent += new_expense.expense_amount
                     cc.save()
                     category.save()

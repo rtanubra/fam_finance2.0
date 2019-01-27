@@ -10,7 +10,18 @@ from .models import Category
 from .forms import CategoryAddForm
 
 import datetime
-# Create your views here.
+#==================Helper Functions#==================
+def calculate_summary(categories):
+    expected = 0
+    spent = 0
+    left = 0
+    for category in categories:
+        expected += category.category_expected
+        spent += category.category_spent
+    left = expected-spent
+    return expected, spent, left
+
+#==================Views here#==================
 def index(request,person_id,month,year):
     person = get_object_or_404(People, id=person_id)
     group = get_object_or_404(Group,id=person.group_couple.id)
@@ -23,13 +34,17 @@ def index(request,person_id,month,year):
         categories= get_list_or_404(Category,category_person=person,category_date__month=month,category_date__year=year)
     else:
         categories = []
+    expected,spent,left = calculate_summary(categories)
     today = datetime.datetime.today()
     context = {
         'person':person,
         'categories':categories,
         'month':today.month,
         'year':today.year,
-        'other_members':other_members
+        'other_members':other_members,
+        'expected': expected,
+        'spent': spent,
+        'left':left
     }
     return render(request, "categories/index.html" ,context)
 
