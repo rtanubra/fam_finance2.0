@@ -7,7 +7,7 @@ import datetime
 # Create your models here.
 class Expense(models.Model):
     def __str__(self):
-        return self.expense_name
+        return self.expense_description
     expense_category = models.ForeignKey(Category, on_delete=models.CASCADE)
     expense_amount = models.DecimalField(max_digits=8,decimal_places=2)
     expense_description = models.CharField(max_length=200)

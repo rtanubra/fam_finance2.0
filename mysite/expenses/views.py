@@ -24,9 +24,9 @@ def add_expense(request,person_id,category_id):
             new_expense = form.save() 
             #We are paying off credit card
             if category == cc:
-                cc.category_expected -= new_expense.expense_amount
-                cc.category_spent -= new_expense.expense_amount
-                cc.save()
+                category.category_expected -= new_expense.expense_amount
+                category.category_spent -= new_expense.expense_amount
+                category.save()
             #Purchasing Actual Expense
             else:
 #==========================pmt type == CC#==========================
@@ -53,3 +53,14 @@ def add_expense(request,person_id,category_id):
         'person':person
     }
     return render(request,'expenses/add_expense.html',context)
+
+def category_expense_list(request,person_id,category_id):
+    person = get_object_or_404(People, id=person_id)
+    category = get_object_or_404(Category, id=category_id)
+    expenses = get_list_or_404(Expense,expense_category=category )
+    context = {
+        'person':person,
+        'category':category,
+        'expenses':expenses
+    }
+    return render(request,"expenses/category_expense_detail.html" ,context)

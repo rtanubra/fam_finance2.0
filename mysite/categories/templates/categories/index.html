@@ -1,15 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
 <h1>Categories</h1>
 <h3>Expense Categories for {{person.person_name}}</h3>
 {% if categories|length > 0 %}
-    <ul>
+    <!--Done to use custom filter subtract variable by variable -->
+    {% load categories_extras %}
+    <table>
+        <tr>
+            <th>Category Name</th>
+            <th>Expected</th>
+            <th>Spent</th>
+            <th>Left</th>
+            <th>Add Expense</th>
+        </tr>
         {% for category in categories %}
-            <li><a href="{% url 'categories:edit_category' person_id=person.id category_id=category.id %}" >{{category.category_name}} Expected:{{category.category_expected}} Spent:{{category.category_spent}}</a></li>
+        <tr>
+            <td><a href="{% url 'categories:edit_category' person_id=person.id category_id=category.id %}" >{{category.category_name}}</a></td>
+            <td>{{category.category_expected}}</td>
+            <td>{{category.category_spent}}</td>
+            <td>{{category.category_expected|subtract:category.category_spent}}</td>
+            {% if category.category_name != 'credit_card' %}
+            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Add Expense Item</button></a></td>
+            {% else %}
+            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Make Payment</button></a></td>
+            {% endif %}
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>{{person.person_name}} has no expenses setup at this moment</p>
 {% endif %}
-<h3>Add Expense</h3>
+<h3>Add Expense Category for {{person.person_name}}</h3>
 <button><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense</a></button>
 
 <h3>Let's Go Back to Groups</h3>

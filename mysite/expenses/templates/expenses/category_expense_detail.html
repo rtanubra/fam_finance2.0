@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+{% load categories_extras %}
+</head>
+
+
+<h1>Expense Breakdown</h1>
+<h3>Summary Table</h3>
+<table>
+    <thead>
+        <tr>
+            <th colspan="3" >{{category.category_name}}</th>
+        </tr>
+        <tr>
+            <th>Expected</th>
+            <th>Spent</th>
+            <th>Left</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{category.category_expected}}</td>
+            <td>{{category.category_spent}}</td>
+            <td>{{category.category_expected|subtract:category.category_spent}}</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Detail Table</h3>
+{% if expenses|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th colspan="4" >Breakdown for {{category.category_name}}</th>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Mehtod of PMT</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{expense.expense_description}}</td>
+                <td>{{expense.expense_amount}}</td>
+                <td>{{expense.method_of_payment}}</td>
+                <td>{{expense.expense_date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No expenses recorded yet for {{category.category_name}} this month</p>
+{% endif %}
+<br>
+<a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id %}" ><button>Add an Expense</button></a><br>
+<h3>Back To {{person.person_name}}'s Expense Summaries</h3>
+<a href="{% url 'categories:person_category_index' person_id=person.id %}" ><button>Back to Summary</button></a>
+
+</html>
