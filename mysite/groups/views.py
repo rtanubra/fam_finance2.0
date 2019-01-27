@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Group
 from people.models import People
 from .forms import GroupAddForm
+import datetime
 
 # Create your views here.
 def index(request):
@@ -44,9 +45,12 @@ def inspect_group(request,my_id):
         else:
             print("Something happend!")
             form = GroupAddForm(instance=obj)
+    today = datetime.datetime.today()
     context = {
         'form':form,
         'group':obj,
-        'people':people
+        'people':people,
+        'month':today.month,
+        'year': today.year
     }
     return render(request,'groups/inspect_group.html',context)

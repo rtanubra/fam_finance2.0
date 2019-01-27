@@ -5,6 +5,7 @@ from groups.models import Group
 from .models import People
 from .forms import PersonAddForm
 
+import datetime
 # Create your views here.
 def index(request):
     people = People.objects.all()
@@ -41,8 +42,11 @@ def edit_person(request,my_id):
         else:
             print("Something happend!")
             form = PersonAddForm()
+    today = datetime.datetime.today()
     context = {
         'form':form,
-        'person':person
+        'person':person,
+        'month':today.month,
+        'year':today.year
     }
     return render(request,'people/edit_person.html',context)

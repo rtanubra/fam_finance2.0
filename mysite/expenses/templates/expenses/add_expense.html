@@ -41,6 +41,6 @@ table, th, td {
     <input type="submit" value = "Save This Entry!" >
 </form>
 <h3>Return to {{person.person_name}}'s Expense list</h3>
-<a href= "{% url 'categories:person_category_index' person_id=person.id %}" ><button>Back to Summary</button></a>
+<a href= "{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button>Back to Summary</button></a>
 <h3>Detail {{category.category_name}} Breakdown</h3>
 <a href= "{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id %}" ><button>Detail View</button></a>

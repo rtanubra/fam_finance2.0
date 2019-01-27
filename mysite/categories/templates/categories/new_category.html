@@ -6,4 +6,4 @@
     <input type="submit" value = "Save This Expense!" >
 </form>
 <h3>Finished recording expenses?</h3>
-<button><a href="{% url 'categories:person_category_index' person_id=person.id %}" >Back to {{person.person_name}}'s Expense Categories</a></button>
+<button><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >Back to {{person.person_name}}'s Expense Categories</a></button>

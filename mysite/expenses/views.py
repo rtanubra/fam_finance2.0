@@ -50,7 +50,9 @@ def add_expense(request,person_id,category_id):
     context = {
         'form':form,
         'category':category,
-        'person':person
+        'person':person,
+        'month':category.category_date.month,
+        'year':category.category_date.year
     }
     return render(request,'expenses/add_expense.html',context)
 
@@ -61,6 +63,8 @@ def category_expense_list(request,person_id,category_id):
     context = {
         'person':person,
         'category':category,
-        'expenses':expenses
+        'expenses':expenses,
+        'month':category.category_date.month,
+        'year':category.category_date.year
     }
     return render(request,"expenses/category_expense_detail.html" ,context)
