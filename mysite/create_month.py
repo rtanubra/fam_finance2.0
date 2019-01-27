@@ -29,6 +29,7 @@ def create_monthly_expenses(expenses_sheet,month,year,person_id):
             category_date = datetime.datetime(year,month,1)
         )
 
+#=========================Run this function to create Rey's typical month======================#
 def create_rey(month,year):
     rey_expense = {
     "groceries":187,
