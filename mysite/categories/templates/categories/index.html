@@ -28,6 +28,7 @@ table, th, td {
             <th>Left</th>
             <th>Add Expense</th>
             <th>Detail View</th>
+            <th>Delete Category</th>
         </tr>
         {% for category in categories %}
         <tr>
@@ -38,9 +39,11 @@ table, th, td {
             {% if category.category_name != 'credit_card' %}
             <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Add Expense Item</button></a></td>
             <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
+            <td><a href="{% url 'categories:delete_category' person_id=person.id category_id=category.id %}" ><button>Delete Category</button></a></td>
             {% else %}
             <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Make Payment</button></a></td>
             <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
+            <td><a href="{% url 'categories:delete_category' person_id=person.id category_id=category.id %}" ><button>Delete Category</button></a></td>
             {% endif %}
         </tr>
         {% endfor %}

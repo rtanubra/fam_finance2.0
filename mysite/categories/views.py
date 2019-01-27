@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404,get_list_or_404
+from django.shortcuts import render, get_object_or_404,get_list_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 #MODELS
@@ -90,3 +90,26 @@ def editCategory(request,person_id,category_id):
         'year':today.year
     }
     return render(request,"categories/edit_category.html",context)
+
+def deleteCategory(request,person_id,category_id):
+    person = get_object_or_404(People, id=person_id)
+    category = get_object_or_404(Category, id=category_id)
+    month = category.category_date.month
+    year = category.category_date.year
+    my_instance = category
+    form = CategoryAddForm(request.POST or None,instance=my_instance,hide_condition=True)
+    if request.method == "POST":
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.delete()
+            return redirect(f"../../{month}_{year}")
+    else:
+        today = datetime.datetime.today()
+        context = {
+            'person':person,
+            'category':category,
+            'form':form,
+            'month':today.month,
+            'year':today.year
+        }
+        return render(request,"categories/delete_category.html",context)

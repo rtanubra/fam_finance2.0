@@ -9,4 +9,6 @@ urlpatterns= [
     path("<int:person_id>/newCategory/",views.addCategory,name="new_category"),
     #categories/1/editCategory/2/
     path("<int:person_id>/editCategory/<int:category_id>/",views.editCategory,name="edit_category"),
+    #categories/1/deleteCategory/2/
+    path("<int:person_id>/deleteCategory/<int:category_id>/",views.deleteCategory,name='delete_category')
 ]
