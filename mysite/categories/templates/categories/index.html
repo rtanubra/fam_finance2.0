@@ -8,6 +8,14 @@ table, th, td {
 </style>
 </head>
 <h1>Categories</h1>
+{% if other_members|length > 0 %}
+    <h3>View {{person.person_name}}'s Team Members </h3>
+    <ul>
+        {% for peep in other_members %}
+        <li><a href = "{% url 'categories:person_category_index' person_id=peep.id month=month year=year %}" >{{peep.person_name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
 <h3>Expense Categories for {{person.person_name}} for month:{{month}} year:{{year}}</h3>
 {% if categories|length > 0 %}
     <!--Done to use custom filter subtract variable by variable -->
@@ -19,6 +27,7 @@ table, th, td {
             <th>Spent</th>
             <th>Left</th>
             <th>Add Expense</th>
+            <th>Detail View</th>
         </tr>
         {% for category in categories %}
         <tr>
@@ -28,8 +37,10 @@ table, th, td {
             <td>{{category.category_expected|subtract:category.category_spent}}</td>
             {% if category.category_name != 'credit_card' %}
             <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Add Expense Item</button></a></td>
+            <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
             {% else %}
             <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Make Payment</button></a></td>
+            <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
             {% endif %}
         </tr>
         {% endfor %}

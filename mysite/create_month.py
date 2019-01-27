@@ -22,12 +22,20 @@ def create_monthly_expenses(expenses_sheet,month,year,person_id):
         expenses.append(exp)
         expected_spendings.append(expenses_sheet[exp])
     for i in range(len(expenses)):
-        Category.objects.create(
-            category_person = my_person,
-            category_name = expenses[i]+str(month)+"_"+str(year),
-            category_expected = expected_spendings[i],
-            category_date = datetime.datetime(year,month,1)
-        )
+        if i == 0:
+            Category.objects.create(
+                category_person = my_person,
+                category_name = expenses[i],
+                category_expected = expected_spendings[i],
+                category_date = datetime.datetime(year,month,1)
+            )
+        else:
+            Category.objects.create(
+                category_person = my_person,
+                category_name = expenses[i]+str(month)+"_"+str(year),
+                category_expected = expected_spendings[i],
+                category_date = datetime.datetime(year,month,1)
+            )
 
 #=========================Run this function to create Rey's typical month======================#
 def create_rey(month,year):
@@ -42,4 +50,10 @@ def create_rey(month,year):
     }
     rey_id = 1 
     create_monthly_expenses(rey_expense,month,year,rey_id)
-    
+
+def create_cassandra(month,year):
+    cassandra_id = 2
+    cassandra_expense = {
+        
+    }
+    create_monthly_expenses(cassandra_expenses,month,year,rey_id)

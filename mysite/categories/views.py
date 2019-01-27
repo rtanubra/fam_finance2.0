@@ -13,6 +13,12 @@ import datetime
 # Create your views here.
 def index(request,person_id,month,year):
     person = get_object_or_404(People, id=person_id)
+    group = get_object_or_404(Group,id=person.group_couple.id)
+    all_people = get_list_or_404(People,group_couple=group)
+    if len(all_people) > 1:
+        other_members = [ peep for peep in all_people if peep != person ]
+    else:
+        other_members = []
     if len(person.category_set.all())>=1:
         categories= get_list_or_404(Category,category_person=person,category_date__month=month,category_date__year=year)
     else:
@@ -22,7 +28,8 @@ def index(request,person_id,month,year):
         'person':person,
         'categories':categories,
         'month':today.month,
-        'year':today.year
+        'year':today.year,
+        'other_members':other_members
     }
     return render(request, "categories/index.html" ,context)
 
