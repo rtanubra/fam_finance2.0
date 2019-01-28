@@ -32,7 +32,7 @@ def create_monthly_expenses(expenses_sheet,month,year,person_id):
         else:
             Category.objects.create(
                 category_person = my_person,
-                category_name = expenses[i]+str(month)+"_"+str(year),
+                category_name = f"{expenses[i]}_{str(month)}_{str(year)}",
                 category_expected = expected_spendings[i],
                 category_date = datetime.datetime(year,month,1)
             )

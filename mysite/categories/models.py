@@ -6,7 +6,7 @@ import datetime
 # Create your models here.
 class Category(models.Model):
     def __str__(self):
-        return self.category_name
+        return f"{self.category_person.person_name} {self.category_name} {self.category_date.month}/{self.category_date.year}"
     def calculate_left(self,expected,spent):
         return expected-spent 
     category_person = models.ForeignKey(People, on_delete=models.CASCADE)
