@@ -36,6 +36,7 @@ def index(request,person_id,month,year):
         categories = []
     expected,spent,left = calculate_summary(categories)
     today = datetime.datetime.today()
+    current_user = get_object_or_404(People, username=request.user)
     context = {
         'person':person,
         'categories':categories,
@@ -44,8 +45,12 @@ def index(request,person_id,month,year):
         'other_members':other_members,
         'expected': expected,
         'spent': spent,
-        'left':left
+        'left':left,
+        "current_user":current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request, "categories/index.html" ,context)
 
 def index_diff_month(request,person_id,month,year):
@@ -54,13 +59,18 @@ def index_diff_month(request,person_id,month,year):
         categories= get_list_or_404(Category,category_person=person,category_date__month=month,category_date__year=year)
     else:
         categories = []
-
+    current_user = current_user = get_object_or_404(People, username=request.user)
+    today = datetime.datetime.today()
     context = {
         'person':person,
         'categories':categories,
         'month':month,
-        'year':year
+        'year':year,
+        "current_user":current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"]
     
 def addCategory(request,person_id):
     person = get_object_or_404(People, id=person_id)
@@ -76,12 +86,17 @@ def addCategory(request,person_id):
             print("Something happend!")
             form = CategoryAddForm(initial=initial_data,hide_condition=True)
     today = datetime.datetime.today()
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context={
         "person":person,
         "form":form,
         'month':today.month,
-        'year':today.year
+        'year':today.year,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"]
     return render(request,"categories/new_category.html",context)
 
 def editCategory(request,person_id,category_id):
@@ -97,13 +112,18 @@ def editCategory(request,person_id,category_id):
             print("Failed validation")
             form = CategoryAddForm(instance=my_instance,hide_condition=True)
     today = datetime.datetime.today()
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
         'person':person,
         'category':category,
         'form':form,
         'month':today.month,
-        'year':today.year
+        'year':today.year,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request,"categories/edit_category.html",context)
 
 def deleteCategory(request,person_id,category_id):
@@ -118,13 +138,19 @@ def deleteCategory(request,person_id,category_id):
             obj = form.save(commit=False)
             obj.delete()
             return redirect(f"../../{month}_{year}")
+    
     else:
         today = datetime.datetime.today()
+        current_user = current_user = get_object_or_404(People, username=request.user)
         context = {
             'person':person,
             'category':category,
             'form':form,
             'month':today.month,
-            'year':today.year
+            'year':today.year,
+            'current_user':current_user
         }
+        today = datetime.datetime.today()
+        context["this_month"] = today.month
+        context["this_year"] = today.year
         return render(request,"categories/delete_category.html",context)

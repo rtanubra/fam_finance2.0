@@ -1,13 +1,13 @@
+{% extends 'bases/header.html' %}
+
+{% block content %}
 <h1>People</h1>
 <form method=POST action="" >
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value = "Save Edits!" >
 </form>
-
-<h3>Visit {{person.person_name}}'s Expenses?</h3>
+<br>
 <button><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >{{person.person_name}} Expenses</a></button>
-
-<h3>All set with editing?</h3>
-<button><a href="{% url 'people:people_index' %}" >Back to summary</a></button>
-
+<button><a href="{% url 'group:inspect_group' %}" >{{person.group_couple.group_name}}</a></button>
+{% endblock %}

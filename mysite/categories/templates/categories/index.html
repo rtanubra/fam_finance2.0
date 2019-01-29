@@ -11,6 +11,7 @@
         {% endfor %}
     </ul>
 {% endif %}
+
 <h3>Expense Categories for {{person.person_name}} for month:{{month}} year:{{year}}</h3>
 {% if categories|length > 0 %}
     <!--Done to use custom filter subtract variable by variable -->
@@ -68,5 +69,5 @@
 
 <h3>Let's Go Back to Groups</h3>
 <button><a href="{% url 'groups:groups_index' %}">back to groups</a></button>
-
+<br><br>
 {% endblock %}

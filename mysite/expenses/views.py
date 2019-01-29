@@ -49,24 +49,34 @@ def add_expense(request,person_id,category_id):
         else:
             print("HELP")
             form = ExpenseAddForm(initial=initial_data,hide_condition=True)
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
         'form':form,
         'category':category,
         'person':person,
         'month':category.category_date.month,
-        'year':category.category_date.year
+        'year':category.category_date.year,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request,'expenses/add_expense.html',context)
 
 def category_expense_list(request,person_id,category_id):
     person = get_object_or_404(People, id=person_id)
     category = get_object_or_404(Category, id=category_id)
     expenses = get_list_or_404(Expense,expense_category=category )
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
         'person':person,
         'category':category,
         'expenses':expenses,
         'month':category.category_date.month,
-        'year':category.category_date.year
+        'year':category.category_date.year,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request,"expenses/category_expense_detail.html" ,context)

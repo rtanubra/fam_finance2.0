@@ -9,9 +9,14 @@ import datetime
 # Create your views here.
 def index(request):
     people = People.objects.all()
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
-        'people':people
+        'people':people,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request, "people/index.html" ,context)
 
 def create_person(request):
@@ -27,9 +32,14 @@ def create_person(request):
         else:
             print("Something happend!")
             form = PersonAddForm()
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context= {
-        'form':form
+        'form':form,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request,'people/create_person.html',context)
 
 def edit_person(request,my_id):
@@ -43,10 +53,15 @@ def edit_person(request,my_id):
             print("Something happend!")
             form = PersonAddForm()
     today = datetime.datetime.today()
+    current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
         'form':form,
         'person':person,
         'month':today.month,
-        'year':today.year
+        'year':today.year,
+        'current_user':current_user
     }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
     return render(request,'people/edit_person.html',context)

@@ -1,3 +1,6 @@
+{% extends 'bases/header.html' %}
+
+{% block content %}
 <h1>People</h1>
 <h3>People list</h3>
 <ul>
@@ -9,3 +12,4 @@
 <button> <a href= "{% url 'people:create_person' %}">Add a new Person</a> </button>
 <h3>Visit Groups?</h3>
 <button><a href="{% url 'groups:groups_index' %}" >Click to visit groups</a> </button>
+{% endblock %}
