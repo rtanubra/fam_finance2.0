@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-</head>
+{% extends 'bases/header.html' %}
+
+{% block content %}
+
 {% load categories_extras %}
 <h1>Expenses</h1>
 {% if category.category_name != 'credit_card' %}
@@ -44,3 +39,4 @@ table, th, td {
 <a href= "{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button>Back to Summary</button></a>
 <h3>Detail {{category.category_name}} Breakdown</h3>
 <a href= "{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id %}" ><button>Detail View</button></a>
+{% endblock %}

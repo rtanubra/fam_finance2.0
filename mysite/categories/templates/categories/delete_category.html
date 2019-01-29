@@ -1,3 +1,7 @@
+{% extends 'bases/header.html' %}
+
+{% block content %}
+
 <h1>Categories</h1>
 <h3>Delete Category Expense {{person.person_name}}, Category : {{category.category_name}}</h3>
 <form method=POST action="">
@@ -7,3 +11,5 @@
 </form>
 <h3>Second Thoughts? you can just go back</h3>
 <button><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >Back to {{person.person_name}}'s Expense Categories</a></button>
+
+{% endblock %}

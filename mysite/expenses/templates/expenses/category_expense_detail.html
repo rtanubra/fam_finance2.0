@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-{% load categories_extras %}
-</head>
+{% extends 'bases/header.html' %}
 
+{% block content %}
+
+{% load categories_extras %}
 
 <h1>Expense Breakdown</h1>
 <h3>Summary Table</h3>
@@ -64,4 +58,4 @@ table, th, td {
 <h3>Back To {{person.person_name}}'s Expense Summaries</h3>
 <a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button>Back to Summary</button></a>
 
-</html>
+{% endblock %}

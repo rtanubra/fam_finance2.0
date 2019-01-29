@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-</head>
+{% extends 'bases/header.html' %}
+
+{% block content %}
+
 <h1>Categories</h1>
 {% if other_members|length > 0 %}
     <h3>View {{person.person_name}}'s Team Members </h3>
@@ -73,3 +68,5 @@ table, th, td {
 
 <h3>Let's Go Back to Groups</h3>
 <button><a href="{% url 'groups:groups_index' %}">back to groups</a></button>
+
+{% endblock %}
