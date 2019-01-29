@@ -6,7 +6,8 @@ The project contains multiple mini applications that will enable us to do so:
 
     1.pages:
         -maintains the header navbar for each of subsequent templates
-        -utilizes bootstrap cdn so must be used on the internet.
+        -utilizes static bootstrap and js so should work with or without internet.
+        -considerations during production would be to move to cdn for speed considerations
 
     2.groups:
         -maintains the database of groups 
@@ -38,7 +39,7 @@ The project contains multiple mini applications that will enable us to do so:
         -maintains the database of expenses for each category
         -functionality allows for creating and listing expenses
         -model_name : Expense
-            -expense_category
+            -expense_category -linked to the category database on to many relationship.
             -expense_description
             -expense_amount
             -expense_date

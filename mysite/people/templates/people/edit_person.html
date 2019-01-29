@@ -9,5 +9,5 @@
 </form>
 <br>
 <button><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >{{person.person_name}} Expenses</a></button>
-<button><a href="{% url 'group:inspect_group' %}" >{{person.group_couple.group_name}}</a></button>
+<button><a href="{% url 'groups:inspect_group' person.group_couple.id %}" >{{person.group_couple.group_name}}</a></button>
 {% endblock %}
