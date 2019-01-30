@@ -30,7 +30,7 @@ def index(request,person_id,month,year):
         other_members = [ peep for peep in all_people if peep != person ]
     else:
         other_members = []
-    if len(person.category_set.all())>=1:
+    if len(person.category_set.filter(category_date__month=month,category_date__year=year))>=1:
         categories= get_list_or_404(Category,category_person=person,category_date__month=month,category_date__year=year)
     else:
         categories = []
@@ -53,6 +53,55 @@ def index(request,person_id,month,year):
     context["this_year"] = today.year
     return render(request, "categories/index.html" ,context)
 
+#==================Views here#==================
+def index_team(request,group_id,month,year):
+    group = get_object_or_404(Group,id=group_id)
+    all_people = get_list_or_404(People,group_couple=group)
+    categories = []
+    for person in all_people:
+        if len(person.category_set.filter(category_date__month=month,category_date__year=year))>0:
+            categories.extend(get_list_or_404(Category,category_person=person,category_date__month=month,category_date__year=year))
+
+    expected,spent,left = calculate_summary(categories)
+    today = datetime.datetime.today()
+    current_user = get_object_or_404(People, username=request.user)
+    context = {
+        'categories':categories,
+        'month':today.month,
+        'year':today.year,
+        'expected': expected,
+        'spent': spent,
+        'left':left,
+        "current_user":current_user
+    }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
+    return render(request, "categories/index_team.html" ,context)
+
+def index_person(request,person_id,month,year):
+    person = get_object_or_404(People,id=person_id)
+    if len(person.category_set.filter(category_date__month=month,category_date__year=year))>0:
+        categories = get_list_or_404(Category, category_person=person, category_date__month=month,category_date__year=year)
+    else:
+        categories = []
+    expected,spent,left = calculate_summary(categories)
+    today = datetime.datetime.today()
+    current_user = get_object_or_404(People, username=request.user)
+    context = {
+        'categories':categories,
+        'month':today.month,
+        'year':today.year,
+        'expected': expected,
+        'spent': spent,
+        'left':left,
+        "current_user":current_user
+    }
+    today = datetime.datetime.today()
+    context["this_month"] = today.month
+    context["this_year"] = today.year
+    return render(request, "categories/index_person.html" ,context)
+
 def index_diff_month(request,person_id,month,year):
     person = get_object_or_404(People, id=person_id)
     if len(person.category_set.all())>=1:
@@ -70,7 +119,7 @@ def index_diff_month(request,person_id,month,year):
     }
     today = datetime.datetime.today()
     context["this_month"] = today.month
-    context["this_year"]
+    context["this_year"] = today.year
     
 def addCategory(request,person_id):
     person = get_object_or_404(People, id=person_id)

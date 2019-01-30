@@ -1,0 +1,54 @@
+{% extends 'bases/header.html' %}
+
+{% block content %}
+{% load categories_extras %}
+<h3>Summary {{person.person_name}}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Expected</th>
+                <th>Spent</th>
+                <th>Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{expected}}</td>
+                <td>{{spent}}</td>
+                <td>{{left}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+
+<h3>Categories {{person.person_name}}</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Owner</th>
+            <th>Expected</th>
+            <th>Spent</th>
+            <th>Left</th>
+        </tr>
+    </thead>
+    {% for category in categories %}
+        <tr>
+            <td>{{category.category_name}}</td>
+            <td>{{category.category_person.person_name}}</td>
+            <td>{{category.category_expected}}</td>
+            <td>{{category.category_spent}}</td>
+            <td>{{category.category_expected|subtract:category.category_spent}}</td>
+        </tr>
+    {% endfor %}
+    <tbody>
+
+    </tbody>
+</table>
+    <!--Done to use custom filter subtract variable by variable -->
+    {% load categories_extras %}
+<br>
+
+
+<br><br><br>
+{% endblock %}

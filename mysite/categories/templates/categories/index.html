@@ -1,18 +1,37 @@
 {% extends 'bases/header.html' %}
 
 {% block content %}
-
-<h1>Categories</h1>
+<br>
+<h2>{{person.person_name}}'s Expense Report for {{month}}/{{year}}</h2>
+<br>
 {% if other_members|length > 0 %}
-    <h3>View {{person.person_name}}'s Team Members </h3>
+    <h3>Partner at {{person.group_couple.group_name}} </h3>
     <ul>
         {% for peep in other_members %}
-        <li><a href = "{% url 'categories:person_category_index' person_id=peep.id month=month year=year %}" >{{peep.person_name}}</a></li>
+        <li>{{peep.person_name}}</li>
         {% endfor %}
     </ul>
 {% endif %}
 
-<h3>Expense Categories for {{person.person_name}} for month:{{month}} year:{{year}}</h3>
+<h3>Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Expected</th>
+                <th>Spent</th>
+                <th>Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{expected}}</td>
+                <td>{{spent}}</td>
+                <td>{{left}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+<h3>Categories for month:{{month}} year:{{year}}</h3>
 {% if categories|length > 0 %}
     <!--Done to use custom filter subtract variable by variable -->
     {% load categories_extras %}
@@ -44,30 +63,13 @@
         </tr>
         {% endfor %}
     </table>
-    <h3>Summary Table</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Expected</th>
-                <th>Spent</th>
-                <th>Left</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{expected}}</td>
-                <td>{{spent}}</td>
-                <td>{{left}}</td>
-            </tr>
-        </tbody>
-    </table>
+    
 {% else %}
     <p>{{person.person_name}} has no expenses setup at this moment</p>
 {% endif %}
+<br>
 <h3>Add Expense Category for {{person.person_name}}</h3>
 <button><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense</a></button>
 
-<h3>Let's Go Back to Groups</h3>
-<button><a href="{% url 'groups:groups_index' %}">back to groups</a></button>
-<br><br>
+<br><br><br>
 {% endblock %}
