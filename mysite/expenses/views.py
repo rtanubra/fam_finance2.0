@@ -66,7 +66,10 @@ def add_expense(request,person_id,category_id):
 def category_expense_list(request,person_id,category_id):
     person = get_object_or_404(People, id=person_id)
     category = get_object_or_404(Category, id=category_id)
-    expenses = get_list_or_404(Expense,expense_category=category )
+    if len(category.expense_set.all())>0:
+        expenses = get_list_or_404(Expense,expense_category=category )
+    else:
+        expenses = []
     current_user = current_user = get_object_or_404(People, username=request.user)
     context = {
         'person':person,

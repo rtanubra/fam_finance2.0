@@ -9,6 +9,6 @@
     <input type="submit" class='btn btn-outline-success' value = "Save This Expense!" >
 </form>
 <br>
-<button type='button' class='btn btn-outline-info' ><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >{{person.person_name}}'s Expenses</a></button>
+<button type='button' class='btn btn-outline-info' ><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >Back to Expense Report</a></button>
 <br><br>
 {% endblock %}

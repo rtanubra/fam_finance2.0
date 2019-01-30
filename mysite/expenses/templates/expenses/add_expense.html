@@ -36,7 +36,7 @@
     <input type="submit" class ='btn btn-outline-success' value = "Save This Entry!">
 </form>
 <br>
-<a href= "{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button type='button' class= 'btn btn-outline-primary' > {{person.person_name}}</button></a>
+<a href= "{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button type='button' class= 'btn btn-outline-primary' > Back to Expense Report</button></a>
 <a href= "{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id %}" ><button type='button' class='btn btn-outline-info' >{{category.category_name}}</button></a>
 <br><br>
 {% endblock %}

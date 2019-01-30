@@ -54,7 +54,7 @@
     <p>No expenses recorded yet for {{category.category_name}} this month</p>
 {% endif %}
 <br>
-<a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id %}"><button type='button' class='btn btn-outline-success' >Add an Expense</button></a> <a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button type='button' class='btn btn-outline-info' >Back to Summary</button></a>
+<a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id %}"><button type='button' class='btn btn-outline-success' >Add an Expense</button></a> <a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" ><button type='button' class='btn btn-outline-info' >Back to Expense Report</button></a>
 <br><br><br>
 
 {% endblock %}
