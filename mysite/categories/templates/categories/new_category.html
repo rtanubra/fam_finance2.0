@@ -1,13 +1,14 @@
 {% extends 'bases/header.html' %}
 
 {% block content %}
-<h1>Categories</h1>
+<br>
 <h3>Add a new Expense Category for {{person.person_name}}</h3><br>
 <form method=POST action="">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value = "Save This Expense!" >
+    <input type="submit" class='btn btn-outline-success' value = "Save This Expense!" >
 </form>
-<h3>Finished recording expenses?</h3>
-<button><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >Back to {{person.person_name}}'s Expense Categories</a></button>
+<br>
+<button type='button' class='btn btn-outline-info' ><a href="{% url 'categories:person_category_index' person_id=person.id month=month year=year %}" >{{person.person_name}}'s Expenses</a></button>
+<br><br>
 {% endblock %}

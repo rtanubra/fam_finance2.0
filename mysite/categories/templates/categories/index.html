@@ -52,14 +52,12 @@
             <td>{{category.category_spent}}</td>
             <td>{{category.category_expected|subtract:category.category_spent}}</td>
             {% if category.category_name != 'credit_card' %}
-            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Add Expense Item</button></a></td>
-            <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
-            <td><a href="{% url 'categories:delete_category' person_id=person.id category_id=category.id %}" ><button>Delete Category</button></a></td>
+            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button type ='button' class = 'btn btn-sm btn-outline-success' >Add Expense</button></a></td> 
             {% else %}
-            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button>Make Payment</button></a></td>
-            <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button>Category Details</button></a></td>
-            <td><a href="{% url 'categories:delete_category' person_id=person.id category_id=category.id %}" ><button>Delete Category</button></a></td>
+            <td><a href="{% url 'expenses:add_expense' person_id=person.id category_id=category.id   %}"><button type='button' class='btn btn-sm btn-outline-success' >Make Payment</button></a></td>
             {% endif %}
+            <td><a href="{% url 'expenses:category_expense_list' person_id=person.id category_id=category.id   %}"><button type = 'button' class= 'btn btn-sm btn-outline-info' >Category Details</button></a></td>
+            <td><a href="{% url 'categories:delete_category' person_id=person.id category_id=category.id %}" ><button type='button' class='btn btn-sm btn-outline-danger' >Delete Category</button></a></td>
         </tr>
         {% endfor %}
     </table>
@@ -68,8 +66,6 @@
     <p>{{person.person_name}} has no expenses setup at this moment</p>
 {% endif %}
 <br>
-<h3>Add Expense Category for {{person.person_name}}</h3>
-<button><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense</a></button>
-
+<button type='button' class='btn btn-outline-primary' ><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense Category</a></button>
 <br><br><br>
 {% endblock %}

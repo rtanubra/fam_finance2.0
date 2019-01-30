@@ -21,7 +21,7 @@ def calculate_summary(categories):
     left = expected-spent
     return expected, spent, left
 
-#==================Views here#==================
+#==================Application level views#==================
 def index(request,person_id,month,year):
     person = get_object_or_404(People, id=person_id)
     group = get_object_or_404(Group,id=person.group_couple.id)
@@ -145,7 +145,7 @@ def addCategory(request,person_id):
     }
     today = datetime.datetime.today()
     context["this_month"] = today.month
-    context["this_year"]
+    context["this_year"] = today.year
     return render(request,"categories/new_category.html",context)
 
 def editCategory(request,person_id,category_id):
