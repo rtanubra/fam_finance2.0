@@ -20,7 +20,7 @@ The project contains multiple mini applications that will enable us to do so:
     3.people:
         -maintains the database of people. 
         -functionality allows for editing,creating, listing people
-        =model_name: People
+        -model_name: People
             -group_couple - linked to the group database one to many relationship
             -group_name 
             -username
@@ -43,3 +43,44 @@ The project contains multiple mini applications that will enable us to do so:
             -expense_description
             -expense_amount
             -expense_date
+
+Application level project views:
+    A lot of the views and templates used during the creation and outline of the
+    application ended up not being used. The following are the templates that ended
+    up being used:
+
+    1.Categories:
+        1. Person level summary:
+            template name = index_person
+            view name = index_person
+        2. Group level summary:
+            template name = index_team
+            view name = index_team
+        3. Expense Report (person view) with functionality:
+            template name = index
+            view name = index
+        4. Edit category:
+            template name=  edit_category
+            view name = editCategory
+        5. Delete category:
+            template name = delete_category
+            view name = deleteCategory
+    2.Expenses
+        1. Add expenses 
+            template name= add_expense
+            view name = add_expense
+        2. Expense list for a given category:
+            template name= category_expense_detail.html
+            view name=category_expense_list
+    3.Bases
+        1.header.html
+    4.People:
+        1. Login - not yet created
+        2. Edit -need to be corrected to name only.
+
+    To prevent users from accidentally going into templates created during 
+    development we can proceed with two rememdies:
+        1. delete views,templates,urls not served up to the user.
+            cleaner approach -best approach
+        2. comment out urls so they are not accessible by the user.
+            easier approach

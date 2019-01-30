@@ -6,7 +6,3 @@ from groups.models import Group
 import datetime
 # Create your views here.
 
-def header(request):
-    username = request.user
-    context = {}
-    return render(request, "bases/header.html",context)
