@@ -4,4 +4,5 @@
 <h3>Welcome back {{current_user.person_name}}</h3>
 <p>Let's Visit {{month}}/{{year}} Expenses</p>
 <a href= "{% url 'categories:person_category_index' current_user.id this_month this_year  %}"  > <button type='button' class='btn btn btn-outline-info'>Expense Details</button></a>
+<a href="{% url 'logout' %}" ><button type='button' class = 'btn btn-outline-danger'  >Logout</button></a>
 {% endblock %}

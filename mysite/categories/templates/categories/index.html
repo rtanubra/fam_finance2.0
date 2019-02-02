@@ -66,6 +66,6 @@
     <p>{{person.person_name}} has no expenses setup at this moment</p>
 {% endif %}
 <br>
-<button type='button' class='btn btn-outline-primary' ><a href="{% url 'categories:new_category' person_id=person.id %}" >Add an Expense Category</a></button>
+<a href="{% url 'categories:new_category' person_id=person.id %}" ><button type='button' class='btn btn-outline-primary' >Add an Expense Category</button></a>
 <br><br><br>
 {% endblock %}
